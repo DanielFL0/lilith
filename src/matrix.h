@@ -9,6 +9,7 @@ double sigmoid_double(double x);
 typedef struct matrix_t {
   uint64_t  rows;
   uint64_t  columns;
+  uint64_t  offset;
   double*   buffer;
 } matrix_t;
 
