@@ -15,6 +15,10 @@ void init_matrix(matrix_t* matrix, uint64_t rows, uint64_t columns) {
   matrix->buffer = malloc(sizeof(double) * rows * columns);
 }
 
+void write_matrix(matrix_t* matrix, uint64_t row, uint64_t column, double data) {
+    
+}
+
 void fill_matrix_zeroes(matrix_t* matrix) {
   uint64_t total = matrix->rows * matrix->columns;
   for (uint64_t i = 0; i < total; i++)
