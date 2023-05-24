@@ -6,7 +6,7 @@ double rand_float(void) {
 }
 
 double sigmoid_double(double x) {
-  return (1 / 1 + pow(EULER_NUMBER, -x))
+  return (1 / 1 + pow(EULER_NUMBER, -x));
 }
 
 void init_matrix(matrix_t* matrix, uint64_t rows, uint64_t columns) {
@@ -27,21 +27,26 @@ void write_matrix(matrix_t* matrix, uint64_t row, uint64_t column, double data) 
 }
 
 void fill_matrix_zeroes(matrix_t* matrix) {
-  uint64_t total = matrix->rows * matrix->columns;
-  for (uint64_t i = 0; i < total; i++)
-    matrix->buffer[i] = 0;
+  for (uint64_t i = 0; i < matrix->rows; i++) {
+    for (uint64_t j = 0; j < matrix->columns; j++) {
+      write_matrix(matrix, i, j, 0.0);
+    }
+  }
 }
 
 void fill_matrix_rand(matrix_t* matrix, double lower_bound, double upper_bound) {
-  uint64_t total = matrix->rows * matrix->columns;
-  for (uint64_t i = 0; i < total; i++)
-    matrix->buffer[i] = rand_float() * (upper_bound - lower_bound) + lower_bound;;
+  for (uint64_t i = 0; i < matrix->rows; i++) {
+    for (uint64_t j = 0; j < matrix->columns; j++) {
+      write_matrix(matrix, i, j, rand_float() * (upper_bound - lower_bound) + lower_bound);
+    }
+  }
 }
 
 void print_matrix(matrix_t* matrix) {
-  uint64_t total = matrix->rows * matrix->columns;
-  uint64_t row = 0;
-  uint64_t column = 0;
-  for (uint64_t i = 0; i < total; i++)
-    printf("%lf\n", matrix->buffer[i]);
+  for (uint64_t i = 0; i < matrix->rows; i++) {
+    for (uint64_t j = 0; j < matrix->columns; j++) {
+      printf("%lf ", get_matrix(matrix, i, j));
+    }
+    printf("\n");
+  }
 }
