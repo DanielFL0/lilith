@@ -2,7 +2,7 @@
 #include "matrix.h"
 
 double rand_float(void) {
-    return (double) rand() / (double) RAND_MAX;
+  return (double) rand() / (double) RAND_MAX;
 }
 
 double sigmoid_double(double x) {
@@ -12,15 +12,18 @@ double sigmoid_double(double x) {
 void init_matrix(matrix_t* matrix, uint64_t rows, uint64_t columns) {
   matrix->rows = rows;
   matrix->columns = columns;
+  matrix->offset = columns;
   matrix->buffer = malloc(sizeof(double) * rows * columns);
 }
 
 double get_matrix(matrix_t* matrix, uint64_t row, uint64_t column) {
-    
+  uint64_t idx = column * matrix->offset + row;
+  return matrix->buffer[idx];
 }
 
 void write_matrix(matrix_t* matrix, uint64_t row, uint64_t column, double data) {
-
+  uint64_t idx = column * matrix->offset + row;
+  matrix->buffer[idx] = data;
 }
 
 void fill_matrix_zeroes(matrix_t* matrix) {
